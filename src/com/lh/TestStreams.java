@@ -2,6 +2,7 @@ package com.lh;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TestStreams {
 
@@ -15,10 +16,14 @@ public class TestStreams {
         Provider myprovider = items.stream()
                 .filter(p -> p.getProviderName().equalsIgnoreCase("E.on"))
                 .findFirst()
-                .get();
+                .orElse(null);
 
-        System.out.println(myprovider.getElctricityId());
-        System.out.println(myprovider.getGasId());
+        if (myprovider != null) {
+            System.out.println(myprovider.getElctricityId());
+            System.out.println(myprovider.getGasId());
+        } else {
+            System.out.println("exception thrown");
+        }
     }
 }
 
